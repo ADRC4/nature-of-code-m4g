@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using UnityEngine.SceneManagement;
+
+public class Exercise1 : MonoBehaviour
+{
+    Texture2D _image;
+    Rect _rectangle;
+    int _width;
+    int _height;
+    int _size;
+    public GameObject box2d;
+    public static List<Vector2> startBox = new List<Vector2>();
+    public static List<Vector3> intancePosition = new List<Vector3>();
+    List<GameObject> _boxIntances = new List<GameObject>();
+
+    private void Start()
+    {
+        int scale = 8;
+        _width = 400 / scale;
+        _height = 400 / scale;
+        _size = _width * _height;
+        _image = new Texture2D(_width, _height);
+        _image.filterMode = FilterMode.Point;
+        _rectangle = new Rect(20, Screen.height - (_width * scale) - 30, _width * scale, _height * scale);
+
+        box2d = new GameObject();
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                var coord = hit.textureCoord * _width;
+                var box2d = new Vector2((int)coord.x,(int)coord.y);
+                startBox.Add(box2d);
+                AddBox((int)box2d.x, (int)box2d.y);
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            var Vector2 = Input.GetTouch(0).position;
+            foreach (var index in intancePosition)
+            {
+                var box2d = new Vector2((int)index.x, (int)index.z);
+                startBox.Add(box2d);
+                AddBox((int)box2d.x, (int)box2d.y);
+            }
+        }
+    }
+
+    void AddBox(int x, int y)
+    {
+        float half = _width * 0.5f;
+
+        var pos = new Vector3(
+                (x - half + 0.5f) * _size,
+                (y - half + 0.5f) * _size);
+
+        var intance = Instantiate(box2d, pos, Quaternion.identity);
+    }
+}
+
