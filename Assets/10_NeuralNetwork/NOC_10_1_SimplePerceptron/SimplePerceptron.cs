@@ -13,7 +13,7 @@ public class PercpetronTest01 : MonoBehaviour
     //The formula for a line
     float f(float x)
     {
-        return 3 * x + 2;
+        return 1 * x + 0;
     }
 
     public float m_Width = 4;
@@ -57,7 +57,7 @@ public class PercpetronTest01 : MonoBehaviour
 
             // Draw result
             //ellipse(training[i].inputs[0], training[i].inputs[1], 8, 8);
-            Gizmos.DrawLine(new Vector3(-4, -4, 0), new Vector3(4, 4, 0));
+            Gizmos.DrawLine(new Vector3(-m_Width/2, -m_Height/2, 0), new Vector3(m_Width/2, m_Height/2, 0));
             Gizmos.color = col;
             Gizmos.DrawWireSphere(new Vector3(training[i].inputs[0], training[i].inputs[1], 0), .05f);
             
