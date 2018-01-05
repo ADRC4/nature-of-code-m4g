@@ -1,38 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Perceptron
 {
-    //The activation function
-    public int sign(float n)
-    {
-        if (n > 0) return 1;
-        else return -1;
-    }
 
-    float[] weights = new float[2];  
-    
-    //Constructor
-    public void Percetron()
+    //The Perceptron stores its weights and learning constants.
+    float[] weights;
+    float c = 0.01f;
+
+    public Perceptron(int n)
     {
-        //Initialize the weights randomly
+        weights = new float[n];
+
+        //Weights start off random.
         for (int i = 0; i < weights.Length; i++)
         {
-            weights[i] = Random.Range(-1, 1);
+            weights[i] = Random.Range(-1f, 1f);
         }
-        
     }
-    
-    public int guess (float[] inputs)
+
+    //Return an output based on inputs.
+    public int feedforward(float[] inputs)
     {
         float sum = 0;
-        for (int i = 0; i < weights.Length ; i++)
+        for (int i = 0; i < weights.Length; i++)
         {
             sum += inputs[i] * weights[i];
         }
+        return activate(sum);
+    }
 
-        int output = sign(sum);
-        return output;
+    //Output is a +1 or -1.
+    public int activate(float sum)
+    {
+        if (sum > 0) return 1;
+        else return -1;
+    }
+
+    //Train the network against known data.
+    public void train(float[] inputs, int desired)
+    {
+        int guess = feedforward(inputs);
+        float error = desired - guess;
+        for (int i = 0; i < weights.Length; i++)
+        {
+            weights[i] += c * error * inputs[i];
+        }
     }
 }
