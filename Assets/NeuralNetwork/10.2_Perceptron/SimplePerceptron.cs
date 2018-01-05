@@ -1,61 +1,66 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class SimplePerceptron : MonoBehaviour
+public class PercpetronTest01 : MonoBehaviour
 {
-    private GUISkin _skin;
-    private Rect _rectangle;
-    private int _width;
-    private int _height;
-    private int _size;
-    private Texture2D _image;
-    private Color[] _colors;
 
-    Point[] points = new Point[100];
-    Perceptron p;
+    Perceptron ptron;
 
-	void Start ()
+    //2,000 training points
+    Trainer[] training = new Trainer[2000];
+    int count = 0;
+
+    //The formula for a line
+    float f(float x)
     {
-        //GUI Layout
-        int scale = 4;
-        _width = Screen.width / scale;
-        _height = Screen.height / scale;
-        _size = _width * _height;
-        _image = new Texture2D(_width, _height);
-        _rectangle = new Rect(0, 0, Screen.width, Screen.height);
-        _colors = new Color[_size];
+        return 3 * x + 2;
+    }
 
-        //Perceptron Logic
-        p = new Perceptron();
+    public float m_Width = 4;
+    public float m_Height = 4;
 
-        for (int i = 0; i < points.Length; i++)
-        {
-            points[i] = new Point();
-        }
-
-
-        float[] inputs = { 1, 0.5f };
-        int guess = p.guess(inputs);
-        print(guess);
-
-	}
-
-    void Draw()
+    void Start()
     {
-        foreach (Point p in points)
-        {
-            p.Show();
+        ptron = new Perceptron(3);
 
-            _image.SetPixels(_colors);
-            _image.Apply();
+        //Make 2,000 training points.
+        for (int i = 0; i < training.Length; i++)
+        {
+            float x = Random.Range(-m_Width / 2, m_Width / 2);
+            float y = Random.Range(-m_Height / 2, m_Height / 2);
+            //Is the correct answer 1 or -1?
+            int answer = 1;
+            if (y < f(x)) answer = -1;
+            training[i] = new Trainer(x, y, answer);
         }
     }
 
 
-    private void OnGUI()
+    void Update()
     {
-        GUI.skin = _skin;
-        GUI.DrawTexture(_rectangle, _image);       
+        ptron.train(training[count].inputs, training[count].answer);
+        //For animation, we are training one point at a time.
+        count = (count + 1) % training.Length;
+
+
+    }
+
+    void OnDrawGizmos()
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int guess = ptron.feedforward(training[i].inputs);
+            //Show the classification—no fill for -1, black for +1.
+            Color col = Color.blue;
+            if (guess > 0) col = Color.blue;
+            else col = Color.red;
+
+            // Draw result
+            //ellipse(training[i].inputs[0], training[i].inputs[1], 8, 8);
+            Gizmos.DrawLine(new Vector3(-4, -4, 0), new Vector3(4, 4, 0));
+            Gizmos.color = col;
+            Gizmos.DrawWireSphere(new Vector3(training[i].inputs[0], training[i].inputs[1], 0), .05f);
+            
+        }
     }
 }
