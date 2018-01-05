@@ -7,13 +7,14 @@ public class SimplePerceptronP2 : MonoBehaviour
     Perceptron ptron;
 
     //2,000 training points
+    //training is the point variable in the video tutorial
     Trainer[] training = new Trainer[2000];
     int count = 0;
 
     //The formula for a line
     float f(float x)
     {
-        return 3 * x + 2;
+        return 0.3f * x + 0.2f;
     }
 
     public float m_Width = 4;
@@ -47,24 +48,25 @@ public class SimplePerceptronP2 : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        float x1 = -4;
-        float y1 = f(x1);
-        float x2 = 4;
-        float y2 = f(x2);
-        Gizmos.DrawLine(new Vector3(y1, x1, 0), new Vector3(y2, x2, 0));
-
         for (int i = 0; i < count; i++)
         {
             int guess = ptron.feedforward(training[i].inputs);
             //Show the classification—no fill for -1, black for +1.
             Color col = Color.blue;
             if (guess > 0) col = Color.blue;
-            else col = Color.red;
+            else col = Color.red;            
+            
+            //Draw seperation line
+            var p1 = new Vector3(-m_Width / 2, f(-m_Height / 2), 0);
+            var p2 = new Vector3(m_Width / 2, f(m_Height / 2), 0);
+            Gizmos.DrawLine(p1, p2);
+
+            //Draw Perceptron seperation line
+            var p3 = new Vector3(-m_Width / 2, ptron.guessY(-m_Width / 2), 0);
+            var p4 = new Vector3(m_Width / 2, ptron.guessY(m_Width / 2), 0);
+            Gizmos.DrawLine(p3, p4);
 
             // Draw result
-            //ellipse(training[i].inputs[0], training[i].inputs[1], 8, 8);
-            Gizmos.DrawLine(new Vector3(f(-m_Width / 2), -m_Height / 2, 0), new Vector3(f(m_Width / 2), m_Height / 2, 0));
-
             Gizmos.color = col;
             Gizmos.DrawWireSphere(new Vector3(training[i].inputs[0], training[i].inputs[1], 0), .05f);
             

@@ -7,10 +7,11 @@ public class SimplePerceptron : MonoBehaviour
     Perceptron ptron;
 
     //2,000 training points
+    //training is the point variable in the video tutorial
     Trainer[] training = new Trainer[2000];
     int count = 0;
 
-    //The formula for a line
+    //The formula for a line, start with 1
     float f(float x)
     {
         return 1 * x + 0;

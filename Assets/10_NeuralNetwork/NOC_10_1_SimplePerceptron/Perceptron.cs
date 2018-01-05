@@ -6,8 +6,10 @@ public class Perceptron
 
     //The Perceptron stores its weights and learning constants.
     float[] weights;
+    //Learning Rate
     float c = 0.01f;
 
+    //Constructor
     public Perceptron(int n)
     {
         weights = new float[n];
@@ -46,5 +48,14 @@ public class Perceptron
         {
             weights[i] += c * error * inputs[i];
         }
+    }
+
+    public float guessY(float x)
+    {
+        float w0 = weights[0];
+        float w1 = weights[1];
+        float w2 = weights[2];
+
+        return -(w2 / w1) - (w0 / w1) * x;
     }
 }
