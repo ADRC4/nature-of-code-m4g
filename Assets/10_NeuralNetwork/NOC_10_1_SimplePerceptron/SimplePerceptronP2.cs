@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class SimplePerceptron : MonoBehaviour
+public class SimplePerceptronP2 : MonoBehaviour
 {
 
     Perceptron ptron;
@@ -13,7 +13,7 @@ public class SimplePerceptron : MonoBehaviour
     //The formula for a line
     float f(float x)
     {
-        return 1 * x + 0;
+        return 3 * x + 2;
     }
 
     public float m_Width = 4;
@@ -47,6 +47,12 @@ public class SimplePerceptron : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        float x1 = -4;
+        float y1 = f(x1);
+        float x2 = 4;
+        float y2 = f(x2);
+        Gizmos.DrawLine(new Vector3(y1, x1, 0), new Vector3(y2, x2, 0));
+
         for (int i = 0; i < count; i++)
         {
             int guess = ptron.feedforward(training[i].inputs);
@@ -57,7 +63,8 @@ public class SimplePerceptron : MonoBehaviour
 
             // Draw result
             //ellipse(training[i].inputs[0], training[i].inputs[1], 8, 8);
-            Gizmos.DrawLine(new Vector3(-m_Width/2, -m_Height/2, 0), new Vector3(m_Width/2, m_Height/2, 0));
+            Gizmos.DrawLine(new Vector3(f(-m_Width / 2), -m_Height / 2, 0), new Vector3(f(m_Width / 2), m_Height / 2, 0));
+
             Gizmos.color = col;
             Gizmos.DrawWireSphere(new Vector3(training[i].inputs[0], training[i].inputs[1], 0), .05f);
             
