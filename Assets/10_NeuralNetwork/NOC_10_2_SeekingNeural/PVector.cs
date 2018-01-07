@@ -5,8 +5,8 @@ using UnityEngine;
 public class PVector
 {
 
-    float x;
-    float y;
+    public float x;
+    public float y;
 
     public PVector(float x_, float y_)
     {
