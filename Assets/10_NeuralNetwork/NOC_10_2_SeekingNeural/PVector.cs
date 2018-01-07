@@ -8,13 +8,13 @@ public class PVector
     float x;
     float y;
 
-    PVector(float x_, float y_)
+    public PVector(float x_, float y_)
     {
         x = x_;
         y = y_;
     }
 
-    void add(PVector v)
+    public void add(PVector v)
     {
 
         y = y + v.y;
@@ -22,32 +22,32 @@ public class PVector
         x = x + v.x;
     }
 
-    void sub(PVector v)
+    public void sub(PVector v)
     {
 
         y = y - v.y;
 
         x = x - v.x;
     }
-    
-    void mult(float n)
+
+    public void mult(float n)
     {
         x = x * n;
         y = y * n;
     }
 
-    void div (float n)
+    public void div (float n)
     {
         x = x / n;
         y = y / n;
     }
 
-    float mag()
+    public float mag()
     {
         return sqrt(x * x + y * y);
     }
 
-    void normalize()
+    public void normalize()
     {
         float m = mag();
         if (m != 0)
