@@ -2,36 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Neuron : MonoBehaviour {
-
+public class Neuron
+{
     // Neuron has a position
-    PVector position;
+    public PVector position;
 
     // Neuron has a list of connections
-    ArrayList<Connection> connections;
+    //ArrayList<Connection> connections;
+    public List<Connection> connections;
 
-    Neuron(float x, float y)
+    public Neuron(float x, float y)
     {
         position = new PVector(x, y);
-        connections = new ArrayList<Connection>();
+        connections = new List<Connection>();
     }
 
     // Add a Connection
-    void addConnection(Connection c)
+    public void addConnection(Connection c)
     {
-        connections.add(c);
+        connections.Add(c);
     }
 
     // Draw Neuron as a circle
-    void display()
+    public void display()
     {
-        stroke(0);
-        strokeWeight(1);
-        fill(0);
-        ellipse(position.x, position.y, 16, 16);
+        //stroke(0);
+        //strokeWeight(1);
+        //fill(0);
+        //ellipse(position.x, position.y, 16, 16);
+        Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), .5f);
 
         // Draw all its connections
-        for (Connection c : connections)
+        foreach (Connection c in connections)
         {
             c.display();
         }
