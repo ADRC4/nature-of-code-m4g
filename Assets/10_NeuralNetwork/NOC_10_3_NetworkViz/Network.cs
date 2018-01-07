@@ -2,15 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Network : MonoBehaviour {
+public class Network : MonoBehaviour
+{
+    // The Network has a list of neurons
+    ArrayList<Neuron> neurons;
+    PVector position;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    Network(float x, float y)
+    {
+        position = new PVector(x, y);
+        neurons = new ArrayList<Neuron>();
+    }
+
+    // We can add a Neuron
+    void addNeuron(Neuron n)
+    {
+        neurons.add(n);
+    }
+
+    // We can connection two Neurons
+    void connect(Neuron a, Neuron b)
+    {
+        Connection c = new Connection(a, b, random(1));
+        a.addConnection(c);
+    }
+
+    // We can draw the network
+    void display()
+    {
+        pushMatrix();
+        translate(position.x, position.y);
+        for (Neuron n : neurons)
+        {
+            n.display();
+        }
+        popMatrix();
+    }
 }
