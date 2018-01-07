@@ -44,7 +44,7 @@ public class PVector
 
     public float mag()
     {
-        return sqrt(x * x + y * y);
+        return Mathf.Sqrt(x * x + y * y);
     }
 
     public void normalize()
