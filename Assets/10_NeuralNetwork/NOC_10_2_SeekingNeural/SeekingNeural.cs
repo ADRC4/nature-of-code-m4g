@@ -7,13 +7,13 @@ public class SeekingNeural : MonoBehaviour
 
     PVector desired;
 
-    ArrayList<PVector> targets;
+    PVector[] targets;
 
     void setup()
     {
         size(640, 360);
         // The Vehicle's desired position
-        desired = new PVector(width / 2, height / 2);
+        desired = new PVector(Screen.width / 2, Screen.height / 2);
 
 
         // Create a list of targets
@@ -21,47 +21,60 @@ public class SeekingNeural : MonoBehaviour
 
         // Create the Vehicle (it has to know about the number of targets
         // in order to configure its brain)
-        v = new Vehicle(targets.size(), random(width), random(height));
+        v = new Vehicle(targets.Length(), Random.Range(0,Screen.width), Random.Range(0,Screen.height));
     }
 
     // Make a random ArrayList of targets to steer towards
     void makeTargets()
     {
-        targets = new ArrayList<PVector>();
+        targets = new PVector[i];
         for (int i = 0; i < 8; i++)
         {
-            targets.add(new PVector(random(width), random(height)));
+            targets.add(new PVector(Random.Range(0, Screen.width), Random.Range(0, Screen.height)));
         }
     }
 
-    void draw()
+    void OnDrawGizmos ()
     {
-        background(255);
+        //background(255);
 
         // Draw a circle to show the Vehicle's goal
-        stroke(0);
-        strokeWeight(2);
-        fill(0, 100);
-        ellipse(desired.x, desired.y, 36, 36);
+        //stroke(0);
+        //strokeWeight(2);
+        //fill(0, 100);
+        //ellipse(desired.x, desired.y, 36, 36);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(new Vector3(desired.x, desired.y, 0), 0.3f);
 
         // Draw the targets
-        for (PVector target : targets)
+        foreach (PVector[] target in targets)
         {
-            noFill();
-            stroke(0);
-            strokeWeight(2);
-            ellipse(target.x, target.y, 16, 16);
-            line(target.x, target.y - 16, target.x, target.y + 16);
-            line(target.x - 16, target.y, target.x + 16, target.y);
+            //noFill();
+            //stroke(0);
+            //strokeWeight(2);
+
+            Gizmos.DrawWireSphere(new Vector3(target.x, target.y, 0), 0.1f);
+
+
+            var p1 = new Vector3 (target.x, target.y - 16, 0);
+            var p2 = new Vector3 (target.x - 16, target.y, 0);
+            Gizmos.DrawLine(p1, p2);
+
+
+
+            //ellipse(target.x, target.y, 16, 16);
+            //line(target.x, target.y - 16, target.x, target.y + 16);
+            //line(target.x - 16, target.y, target.x + 16, target.y);
         }
 
         // Update the Vehicle
         v.steer(targets);
-        v.update();
-        v.display();
+        v.Update();
+        v.Display();
     }
 
-    void mousePressed()
+    void OnMouseButton()
     {
         makeTargets();
     }
