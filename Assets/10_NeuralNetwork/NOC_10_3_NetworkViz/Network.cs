@@ -1,41 +1,42 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class Network : MonoBehaviour
-//{
-//    // The Network has a list of neurons
-//    ArrayList<Neuron> neurons;
-//    PVector position;
+public class Network
+{
+    // The Network has a list of neurons
+    public List<Neuron> neurons;
+    public PVector position;
 
-//    Network(float x, float y)
-//    {
-//        position = new PVector(x, y);
-//        neurons = new ArrayList<Neuron>();
-//    }
+    public Network(float x, float y)
+    {
+        position = new PVector(x, y);
+        neurons = new List<Neuron>();
+    }
 
-//    // We can add a Neuron
-//    void addNeuron(Neuron n)
-//    {
-//        neurons.add(n);
-//    }
+    // We can add a Neuron
+    public void AddNeuron(Neuron n)
+    {
+        neurons.Add(n);
+    }
 
-//    // We can connection two Neurons
-//    void connect(Neuron a, Neuron b)
-//    {
-//        Connection c = new Connection(a, b, random(1));
-//        a.addConnection(c);
-//    }
+    // We can connection two Neurons
+    public void Connect(Neuron a, Neuron b)
+    {
+        Connection c = new Connection(a, b, Random.Range(0.0f,0.5f));
+        a.AddConnection(c);
+    }
 
-//    // We can draw the network
-//    void display()
-//    {
-//        pushMatrix();
-//        translate(position.x, position.y);
-//        for (Neuron n : neurons)
-//        {
-//            n.display();
-//        }
-//        popMatrix();
-//    }
-//}
+    // We can draw the network
+    public void Display()
+    {
+        //GL.PushMatrix();
+        //translate(position.x, position.y);
+        foreach (Neuron n in neurons)
+        {
+            n.Display();
+        }
+        //GL.PopMatrix();
+
+    }
+}
