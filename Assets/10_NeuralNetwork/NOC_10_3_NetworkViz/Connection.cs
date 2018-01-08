@@ -19,9 +19,9 @@ public class Connection
     }
 
     // Drawn as a line
-    public void display()
+    public void Display()
     {
-        strokeWeight(weight * 4);
-        Gizmos.DrawLine(a.position.x, a.position.y, b.position.x, b.position.y);
+        float strokeWeight = weight * 4;
+        Gizmos.DrawLine(new Vector3(a.position.x, a.position.y,0), new Vector3(b.position.x, b.position.y,0));
     }
 }

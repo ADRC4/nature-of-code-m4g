@@ -7,8 +7,7 @@ public class Neuron
     // Neuron has a position
     public PVector position;
 
-    // Neuron has a list of connections
-    //ArrayList<Connection> connections;
+    // Neuron has a list of connections    
     public List<Connection> connections;
 
     public Neuron(float x, float y)
@@ -18,13 +17,13 @@ public class Neuron
     }
 
     // Add a Connection
-    public void addConnection(Connection c)
+    public void AddConnection(Connection c)
     {
         connections.Add(c);
     }
 
     // Draw Neuron as a circle
-    public void display()
+    public void Display()
     {
         //stroke(0);
         //strokeWeight(1);
@@ -35,7 +34,7 @@ public class Neuron
         // Draw all its connections
         foreach (Connection c in connections)
         {
-            c.display();
+            c.Display();
         }
     }
 }

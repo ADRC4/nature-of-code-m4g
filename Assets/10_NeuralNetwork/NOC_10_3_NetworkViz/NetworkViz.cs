@@ -15,29 +15,29 @@ public class NetworkViz : MonoBehaviour {
         network = new Network(width / 2, height / 2);
 
         // Create a bunch of Neurons
-        Neuron a = new Neuron(-200, 0);
-        Neuron b = new Neuron(0, 75);
-        Neuron c = new Neuron(0, -75);
-        Neuron d = new Neuron(200, 0);
+        Neuron a = new Neuron(-2, 0);
+        Neuron b = new Neuron(0, 0.75f);
+        Neuron c = new Neuron(0, -0.75f);
+        Neuron d = new Neuron(2, 0);
 
         // Connect them
-        network.connect(a, b);
-        network.connect(a, c);
-        network.connect(b, d);
-        network.connect(c, d);
+        network.Connect(a, b);
+        network.Connect(a, c);
+        network.Connect(b, d);
+        network.Connect(c, d);
 
         // Add them to the Network
-        network.addNeuron(a);
-        network.addNeuron(b);
-        network.addNeuron(c);
-        network.addNeuron(d);
+        network.AddNeuron(a);
+        network.AddNeuron(b);
+        network.AddNeuron(c);
+        network.AddNeuron(d);
     }
 
     void OnDrawGizmos()
     {
         //background(255);
         // Draw the Network
-        network.display();
-        noLoop();
+        network.Display();
+        //noLoop();
     }
 }
