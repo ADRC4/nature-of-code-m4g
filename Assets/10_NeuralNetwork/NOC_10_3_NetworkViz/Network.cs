@@ -23,7 +23,7 @@ public class Network
     // We can connection two Neurons
     public void Connect(Neuron a, Neuron b)
     {
-        Connection c = new Connection(a, b, Random.value);
+        Connection c = new Connection(a, b, Random.Range(0.0f,0.5f));
         a.AddConnection(c);
     }
 

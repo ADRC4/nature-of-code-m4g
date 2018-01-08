@@ -21,7 +21,11 @@ public class Connection
     // Drawn as a line
     public void Display()
     {
-        float strokeWeight = weight * 4;
+        
+        Gizmos.color = Color.HSVToRGB(0,0,weight);
         Gizmos.DrawLine(new Vector3(a.position.x, a.position.y,0), new Vector3(b.position.x, b.position.y,0));
+        
     }
+
+ 
 }
