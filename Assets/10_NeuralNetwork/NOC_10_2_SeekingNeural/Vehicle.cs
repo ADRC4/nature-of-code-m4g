@@ -5,7 +5,7 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour
 {
     // Vehicle now has a brain!
-    Perceptron brain;
+    Perceptron2 brain;
 
 
     PVector position;
@@ -16,9 +16,9 @@ public class Vehicle : MonoBehaviour
     float maxforce;    // Maximum steering force
     float maxspeed;    // Maximum speed
 
-    Vehicle(int n, float x, float y)
+    public Vehicle(int n, float x, float y)
     {
-        brain = new Perceptron2 (n, 0.001);
+        brain = new Perceptron2(n, 0.001f);
         acceleration = new PVector(0, 0);
         velocity = new PVector(0, 0);
         position = new PVector(x, y);
@@ -28,7 +28,7 @@ public class Vehicle : MonoBehaviour
     }
 
     // Method to update position
-    void update()
+    void Update()
     {
         // Update velocity
         velocity.add(acceleration);
@@ -38,33 +38,43 @@ public class Vehicle : MonoBehaviour
         // Reset accelerationelertion to 0 each cycle
         acceleration.mult(0);
 
-        position.x = constrain(position.x, 0, width);
-        position.y = constrain(position.y, 0, height);
+        if (position.x > 0 && position.x < Screen.width)
+        {
+            this position.x = position.x;
+        }
+
+        if(position.y > 0 && position.y < Screen.width)
+        {
+            this position.y = position.y;
+        }
+
+        //position.x = constrain(position.x, 0, Screen.width);
+        //position.y = constrain(position.y, 0, Screen.height);
     }
 
-    void applyForce(Vector2 force)
+    void ApplyForce(PVector force)
     {
         // We could add mass here if we want A = F / M
         acceleration.add(force);
     }
 
     // Here is where the brain processes everything
-    void steer(ArrayList[PVector] targets)
+    void steer(PVector[] targets)
     {
         // Make an array of forces
-        PVector[] forces = new PVector[targets.size()];
+        PVector[] forces = new targets.length; ///// ----- what is size of arraylist
 
         // Steer towards all targets
-        for (int i = 0; i < forces.length; i++)
+        for (int i = 0; i < forces.Length; i++)
         {
-            forces[i] = seek(targets.get(i));
+            forces[i] = seek(target (i)); ////-------????
         }
 
         // That array of forces is the input to the brain
         PVector result = brain.feedforward(forces);
 
         // Use the result to steer the vehicle
-        applyForce(result);
+        ApplyForce(result);
 
         // Train the brain according to the error
         PVector error = PVector.sub(desired, position);
@@ -88,14 +98,17 @@ public class Vehicle : MonoBehaviour
         return steer;
     }
 
-    void display()
+    void Display () //////------?????
     {
 
         // Draw a triangle rotated in the direction of velocity
         float theta = velocity.heading2D() + PI / 2;
-        fill(175);
-        stroke(0);
-        strokeWeight(1);
+
+        Color color = Color.green;
+
+        //stroke(0);
+        //strokeWeight(1);
+
         pushMatrix();
         translate(position.x, position.y);
         rotate(theta);
@@ -107,4 +120,32 @@ public class Vehicle : MonoBehaviour
         popMatrix();
     }
 
+
+
+    /*void OnDrawGizmos()
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int guess = ptron.feedforward(training[i].inputs);
+            //Show the classification—no fill for -1, black for +1.
+            Color col = Color.blue;
+            if (guess > 0) col = Color.blue;
+            else col = Color.red;
+
+            //Draw seperation line
+            var p1 = new Vector3(-m_Width / 2, f(-m_Height / 2), 0);
+            var p2 = new Vector3(m_Width / 2, f(m_Height / 2), 0);
+            Gizmos.DrawLine(p1, p2);
+
+            //Draw Perceptron seperation line
+            var p3 = new Vector3(-m_Width / 2, ptron.guessY(-m_Width / 2), 0);
+            var p4 = new Vector3(m_Width / 2, ptron.guessY(m_Width / 2), 0);
+            Gizmos.DrawLine(p3, p4);
+
+            // Draw result
+            Gizmos.color = col;
+            Gizmos.DrawWireSphere(new Vector3(training[i].inputs[0], training[i].inputs[1], 0), .05f);
+
+        }
+    }*/
 }
