@@ -1,108 +1,151 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class Vehicle : MonoBehaviour
-//{
-//         // Vehicle now has a brain!
-//        Perceptron brain;
+public class Vehicle : MonoBehaviour
+{
+    // Vehicle now has a brain!
+    Perceptron2 brain;
 
-//        PVector position;
-//        PVector velocity;
-//        PVector acceleration;
-//        float r;
-//        float maxforce;    // Maximum steering force
-//        float maxspeed;    // Maximum speed
 
-//        Vehicle(int n, float x, float y)
-//        {
-//            brain = new Perceptron(n, 0.001);
-//            acceleration = new PVector(0, 0);
-//            velocity = new PVector(0, 0);
-//            position = new PVector(x, y);
-//            r = 3.0;
-//            maxspeed = 4;
-//            maxforce = 0.1;
-//        }
+    PVector position;
+    PVector velocity;
+    PVector acceleration;
 
-//        // Method to update position
-//        void update()
-//        {
-//            // Update velocity
-//            velocity.add(acceleration);
-//            // Limit speed
-//            velocity.limit(maxspeed);
-//            position.add(velocity);
-//            // Reset accelerationelertion to 0 each cycle
-//            acceleration.mult(0);
+    float r;
+    float maxforce;    // Maximum steering force
+    float maxspeed;    // Maximum speed
 
-//            position.x = constrain(position.x, 0, width);
-//            position.y = constrain(position.y, 0, height);
-//        }
+    public Vehicle(int n, float x, float y)
+    {
+        brain = new Perceptron2(n, 0.001f);
+        acceleration = new PVector(0, 0);
+        velocity = new PVector(0, 0);
+        position = new PVector(x, y);
+        r = 3.0f;
+        maxspeed = 4;
+        maxforce = 0.1f;
+    }
 
-//        void applyForce(PVector force)
-//        {
-//            // We could add mass here if we want A = F / M
-//            acceleration.add(force);
-//        }
+    // Method to update position
+    void Update()
+    {
+        // Update velocity
+        velocity.add(acceleration);
+        // Limit speed
+        velocity.limit(maxspeed);
+        position.add(velocity);
+        // Reset accelerationelertion to 0 each cycle
+        acceleration.mult(0);
 
-//        // Here is where the brain processes everything
-//        void steer(ArrayList<PVector> targets)
-//        {
-//            // Make an array of forces
-//            PVector[] forces = new PVector[targets.size()];
+        if (position.x > 0 && position.x < Screen.width)
+        {
+            this position.x = position.x;
+        }
 
-//            // Steer towards all targets
-//            for (int i = 0; i < forces.length; i++)
-//            {
-//                forces[i] = seek(targets.get(i));
-//            }
+        if(position.y > 0 && position.y < Screen.width)
+        {
+            this position.y = position.y;
+        }
 
-//            // That array of forces is the input to the brain
-//            PVector result = brain.feedforward(forces);
+        //position.x = constrain(position.x, 0, Screen.width);
+        //position.y = constrain(position.y, 0, Screen.height);
+    }
 
-//            // Use the result to steer the vehicle
-//            applyForce(result);
+    void ApplyForce(PVector force)
+    {
+        // We could add mass here if we want A = F / M
+        acceleration.add(force);
+    }
 
-//            // Train the brain according to the error
-//            PVector error = PVector.sub(desired, position);
-//            brain.train(forces, error);
+    // Here is where the brain processes everything
+    void steer(PVector[] targets)
+    {
+        // Make an array of forces
+        PVector[] forces = new targets.length; ///// ----- what is size of arraylist
 
-//        }
+        // Steer towards all targets
+        for (int i = 0; i < forces.Length; i++)
+        {
+            forces[i] = seek(target (i)); ////-------????
+        }
 
-//        // A method that calculates a steering force towards a target
-//        // STEER = DESIRED MINUS VELOCITY
-//        PVector seek(PVector target)
-//        {
-//            PVector desired = PVector.sub(target, position);  // A vector pointing from the position to the target
+        // That array of forces is the input to the brain
+        PVector result = brain.feedforward(forces);
 
-//            // Normalize desired and scale to maximum speed
-//            desired.normalize();
-//            desired.mult(maxspeed);
-//            // Steering = Desired minus velocity
-//            PVector steer = PVector.sub(desired, velocity);
-//            steer.limit(maxforce);  // Limit to maximum steering force
+        // Use the result to steer the vehicle
+        ApplyForce(result);
 
-//            return steer;
-//        }
+        // Train the brain according to the error
+        PVector error = PVector.sub(desired, position);
+        brain.train(forces, error);
 
-//        void display()
-//        {
+    }
 
-//            // Draw a triangle rotated in the direction of velocity
-//            float theta = velocity.heading2D() + PI / 2;
-//            fill(175);
-//            stroke(0);
-//            strokeWeight(1);
-//            pushMatrix();
-//            translate(position.x, position.y);
-//            rotate(theta);
-//            beginShape();
-//            vertex(0, -r * 2);
-//            vertex(-r, r * 2);
-//            vertex(r, r * 2);
-//            endShape(CLOSE);
-//            popMatrix();
-//        }
-    
-//}
+    // A method that calculates a steering force towards a target
+    // STEER = DESIRED MINUS VELOCITY
+    PVector seek(PVector target)
+    {
+        PVector desired = PVector.sub(target, position);  // A vector pointing from the position to the target
+
+        // Normalize desired and scale to maximum speed
+        desired.normalize();
+        desired.mult(maxspeed);
+        // Steering = Desired minus velocity
+        PVector steer = PVector.sub(desired, velocity);
+        steer.limit(maxforce);  // Limit to maximum steering force
+
+        return steer;
+    }
+
+    void Display () //////------?????
+    {
+
+        // Draw a triangle rotated in the direction of velocity
+        float theta = velocity.heading2D() + PI / 2;
+
+        Color color = Color.green;
+
+        //stroke(0);
+        //strokeWeight(1);
+
+        pushMatrix();
+        translate(position.x, position.y);
+        rotate(theta);
+        beginShape();
+        vertex(0, -r * 2);
+        vertex(-r, r * 2);
+        vertex(r, r * 2);
+        endShape(CLOSE);
+        popMatrix();
+    }
+
+
+
+    /*void OnDrawGizmos()
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int guess = ptron.feedforward(training[i].inputs);
+            //Show the classification—no fill for -1, black for +1.
+            Color col = Color.blue;
+            if (guess > 0) col = Color.blue;
+            else col = Color.red;
+
+            //Draw seperation line
+            var p1 = new Vector3(-m_Width / 2, f(-m_Height / 2), 0);
+            var p2 = new Vector3(m_Width / 2, f(m_Height / 2), 0);
+            Gizmos.DrawLine(p1, p2);
+
+            //Draw Perceptron seperation line
+            var p3 = new Vector3(-m_Width / 2, ptron.guessY(-m_Width / 2), 0);
+            var p4 = new Vector3(m_Width / 2, ptron.guessY(m_Width / 2), 0);
+            Gizmos.DrawLine(p3, p4);
+
+            // Draw result
+            Gizmos.color = col;
+            Gizmos.DrawWireSphere(new Vector3(training[i].inputs[0], training[i].inputs[1], 0), .05f);
+
+        }
+    }*/
+}

@@ -1,41 +1,43 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class NetworkViz : MonoBehaviour {
+public class NetworkViz : MonoBehaviour {
 
-//    Network network;
+    Network network;
+    public float width = 6.4f;
+    public float height = 3.6f;
 
-//    void setup()
-//    {
-//        size(640, 360);
-//        // Create the Network object
-//        network = new Network(width / 2, height / 2);
+    void Start()
+    {
+        
+        // Create the Network object
+        network = new Network(width / 2, height / 2);
 
-//        // Create a bunch of Neurons
-//        Neuron a = new Neuron(-200, 0);
-//        Neuron b = new Neuron(0, 75);
-//        Neuron c = new Neuron(0, -75);
-//        Neuron d = new Neuron(200, 0);
+        // Create a bunch of Neurons
+        Neuron a = new Neuron(-2, 0);
+        Neuron b = new Neuron(0, 0.75f);
+        Neuron c = new Neuron(0, -0.75f);
+        Neuron d = new Neuron(2, 0);
 
-//        // Connect them
-//        network.connect(a, b);
-//        network.connect(a, c);
-//        network.connect(b, d);
-//        network.connect(c, d);
+        // Connect them
+        network.Connect(a, b);
+        network.Connect(a, c);
+        network.Connect(b, d);
+        network.Connect(c, d);
 
-//        // Add them to the Network
-//        network.addNeuron(a);
-//        network.addNeuron(b);
-//        network.addNeuron(c);
-//        network.addNeuron(d);
-//    }
+        // Add them to the Network
+        network.AddNeuron(a);
+        network.AddNeuron(b);
+        network.AddNeuron(c);
+        network.AddNeuron(d);
+    }
 
-//    void draw()
-//    {
-//        background(255);
-//        // Draw the Network
-//        network.display();
-//        noLoop();
-//    }
-//}
+    void OnDrawGizmos()
+    {
+        //background(255);
+        // Draw the Network
+        network.Display();
+        //noLoop();
+    }
+}
