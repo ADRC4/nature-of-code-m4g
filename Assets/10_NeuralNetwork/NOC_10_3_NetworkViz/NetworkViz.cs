@@ -40,4 +40,5 @@ public class NetworkViz : MonoBehaviour {
         network.Display();
         //noLoop();
     }
+
 }

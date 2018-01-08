@@ -29,7 +29,8 @@ public class Neuron
         //strokeWeight(1);
         //fill(0);
         //ellipse(position.x, position.y, 16, 16);
-        Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), .5f);
+        Gizmos.color = Color.black;
+        Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), .1f);
 
         // Draw all its connections
         foreach (Connection c in connections)
