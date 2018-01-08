@@ -1,39 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class Neuron : MonoBehaviour {
+//public class Neuron : MonoBehaviour {
 
-    // Neuron has a position
-    PVector position;
+//    // Neuron has a position
+//    PVector position;
 
-    // Neuron has a list of connections
-    ArrayList<Connection> connections;
+//    // Neuron has a list of connections
+//    ArrayList<Connection> connections;
 
-    Neuron(float x, float y)
-    {
-        position = new PVector(x, y);
-        connections = new ArrayList<Connection>();
-    }
+//    Neuron(float x, float y)
+//    {
+//        position = new PVector(x, y);
+//        connections = new ArrayList<Connection>();
+//    }
 
-    // Add a Connection
-    void addConnection(Connection c)
-    {
-        connections.add(c);
-    }
+//    // Add a Connection
+//    void addConnection(Connection c)
+//    {
+//        connections.add(c);
+//    }
 
-    // Draw Neuron as a circle
-    void display()
-    {
-        stroke(0);
-        strokeWeight(1);
-        fill(0);
-        ellipse(position.x, position.y, 16, 16);
+//    // Draw Neuron as a circle
+//    void display()
+//    {
+//        stroke(0);
+//        strokeWeight(1);
+//        fill(0);
+//        ellipse(position.x, position.y, 16, 16);
 
-        // Draw all its connections
-        for (Connection c : connections)
-        {
-            c.display();
-        }
-    }
-}
+//        // Draw all its connections
+//        for (Connection c : connections)
+//        {
+//            c.display();
+//        }
+//    }
+//}
