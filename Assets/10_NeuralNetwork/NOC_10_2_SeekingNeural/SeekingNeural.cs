@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SeekingNeural : MonoBehaviour
 {
+   
     Vehicle v;
 
     PVector desired;
 
-    PVector[] targets;
+    List<PVector> targets;
+    
 
     void setup()
     {
-        size(640, 360);
+        //size(640, 360);
         // The Vehicle's desired position
         desired = new PVector(Screen.width / 2, Screen.height / 2);
 
@@ -21,16 +24,16 @@ public class SeekingNeural : MonoBehaviour
 
         // Create the Vehicle (it has to know about the number of targets
         // in order to configure its brain)
-        v = new Vehicle(targets.Length(), Random.Range(0,Screen.width), Random.Range(0,Screen.height));
+        v = new Vehicle(targets.Count, Random.Range(0,Screen.width), Random.Range(0,Screen.height));
     }
 
     // Make a random ArrayList of targets to steer towards
     void makeTargets()
     {
-        targets = new PVector[i];
+        ArrayList targets = new ArrayList();
         for (int i = 0; i < 8; i++)
         {
-            targets.add(new PVector(Random.Range(0, Screen.width), Random.Range(0, Screen.height)));
+            targets.Add(new PVector(Random.Range(0, Screen.width), Random.Range(0, Screen.height)));
         }
     }
 
@@ -45,14 +48,16 @@ public class SeekingNeural : MonoBehaviour
         //ellipse(desired.x, desired.y, 36, 36);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(new Vector3(desired.x, desired.y, 0), 0.3f);
+        //Gizmos.DrawWireSphere(new Vector3(desired.x, desired.y, 0), 0.3f);
+        Gizmos.DrawCube(new Vector3(desired.x, desired.y, 0), new Vector3(0.5f, 0.5f, 0));
 
         // Draw the targets
-        foreach (PVector[] target in targets)
+        foreach (PVector target in targets)
         {
             //noFill();
             //stroke(0);
             //strokeWeight(2);
+
 
             Gizmos.DrawWireSphere(new Vector3(target.x, target.y, 0), 0.1f);
 
@@ -60,6 +65,8 @@ public class SeekingNeural : MonoBehaviour
             var p1 = new Vector3 (target.x, target.y - 16, 0);
             var p2 = new Vector3 (target.x - 16, target.y, 0);
             Gizmos.DrawLine(p1, p2);
+
+
 
 
 
@@ -71,10 +78,10 @@ public class SeekingNeural : MonoBehaviour
         // Update the Vehicle
         v.steer(targets);
         v.Update();
-        v.Display();
+        //v.Display();
     }
 
-    void OnMouseButton()
+    void OnMouseOver ()
     {
         makeTargets();
     }

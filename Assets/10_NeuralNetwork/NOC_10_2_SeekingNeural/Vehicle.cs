@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour
+public class Vehicle
 {
     // Vehicle now has a brain!
     Perceptron2 brain;
@@ -11,6 +11,7 @@ public class Vehicle : MonoBehaviour
     PVector position;
     PVector velocity;
     PVector acceleration;
+    PVector desired;
 
     float r;
     float maxforce;    // Maximum steering force
@@ -28,46 +29,46 @@ public class Vehicle : MonoBehaviour
     }
 
     // Method to update position
-    void Update()
+    public void Update()
     {
         // Update velocity
         velocity.add(acceleration);
         // Limit speed
-        velocity.limit(maxspeed);
+        //velocity.limit(maxspeed);
         position.add(velocity);
         // Reset accelerationelertion to 0 each cycle
         acceleration.mult(0);
 
         if (position.x > 0 && position.x < Screen.width)
         {
-            this position.x = position.x;
+            this.position.x = position.x;
         }
 
-        if(position.y > 0 && position.y < Screen.width)
+        if(position.y > 0 && position.y < Screen.height)
         {
-            this position.y = position.y;
+            this.position.y = position.y;
         }
 
         //position.x = constrain(position.x, 0, Screen.width);
         //position.y = constrain(position.y, 0, Screen.height);
     }
 
-    void ApplyForce(PVector force)
+    public void ApplyForce(PVector force)
     {
         // We could add mass here if we want A = F / M
         acceleration.add(force);
     }
 
     // Here is where the brain processes everything
-    void steer(PVector[] targets)
+    public void steer(List<PVector> targets)
     {
         // Make an array of forces
-        PVector[] forces = new targets.length; ///// ----- what is size of arraylist
+        PVector[] forces = new PVector[targets.Count]; ///// ----- what is size of arraylist
 
         // Steer towards all targets
         for (int i = 0; i < forces.Length; i++)
         {
-            forces[i] = seek(target (i)); ////-------????
+            forces[i] = seek(targets[i]); ////-------????
         }
 
         // That array of forces is the input to the brain
@@ -77,7 +78,7 @@ public class Vehicle : MonoBehaviour
         ApplyForce(result);
 
         // Train the brain according to the error
-        PVector error = PVector.sub(desired, position);
+        PVector error = PVector.sub2(desired, position);
         brain.train(forces, error);
 
     }
@@ -86,23 +87,23 @@ public class Vehicle : MonoBehaviour
     // STEER = DESIRED MINUS VELOCITY
     PVector seek(PVector target)
     {
-        PVector desired = PVector.sub(target, position);  // A vector pointing from the position to the target
+        PVector desired = PVector.sub2(target, position);  // A vector pointing from the position to the target
 
         // Normalize desired and scale to maximum speed
         desired.normalize();
         desired.mult(maxspeed);
         // Steering = Desired minus velocity
-        PVector steer = PVector.sub(desired, velocity);
-        steer.limit(maxforce);  // Limit to maximum steering force
+        PVector steer = PVector.sub2(desired, velocity);
+        //steer.limit(maxforce);  // Limit to maximum steering force
 
         return steer;
     }
 
-    void Display () //////------?????
+    /*public void Display () //////------?????
     {
 
         // Draw a triangle rotated in the direction of velocity
-        float theta = velocity.heading2D() + PI / 2;
+        float theta = velocity.heading2D() + Mathf.PI / 2;
 
         Color color = Color.green;
 
@@ -110,15 +111,18 @@ public class Vehicle : MonoBehaviour
         //strokeWeight(1);
 
         pushMatrix();
+
         translate(position.x, position.y);
         rotate(theta);
+
         beginShape();
         vertex(0, -r * 2);
-        vertex(-r, r * 2);
+        vertex(-r, r * 2);    /////---- draw triangle
         vertex(r, r * 2);
         endShape(CLOSE);
+
         popMatrix();
-    }
+    }*/
 
 
 

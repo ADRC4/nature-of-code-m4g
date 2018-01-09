@@ -30,6 +30,14 @@ public class PVector
         x = x - v.x;
     }
 
+    public void sub2(PVector v, PVector w) ///----- 2 arguments
+    {
+        x = v.x - w.x;
+        y = v.y - w.y;
+        
+    }
+
+
     public void mult(float n)
     {
         x = x * n;
@@ -55,6 +63,13 @@ public class PVector
             div(m);
         }
     }
+    
+    //public void limit(float f)
+    //{
+    //    if ((double)this.sqrMagnitude > (double)f * (double)f)
+    //        this.set(this.normalized * f);
+    //}
+
 
 }
 

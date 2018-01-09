@@ -42,7 +42,7 @@ public class Perceptron2
     public PVector feedforward(PVector[] forces)
     {
         // Sum all values
-        PVector sum = new PVector();
+        //PVector sum = new PVector();
         for (int i = 0; i < weights.Length; i++)
         {
             forces[i].mult(weights[i]);
