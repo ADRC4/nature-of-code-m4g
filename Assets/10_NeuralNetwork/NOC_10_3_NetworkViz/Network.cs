@@ -6,12 +6,14 @@ public class Network
 {
     // The Network has a list of neurons
     public List<Neuron> neurons;
+    public List<Connection> connections;
     public PVector position;
 
     public Network(float x, float y)
     {
         position = new PVector(x, y);
         neurons = new List<Neuron>();
+        connections = new List<Connection>();
     }
 
     // We can add a Neuron
@@ -21,10 +23,31 @@ public class Network
     }
 
     // We can connection two Neurons
-    public void Connect(Neuron a, Neuron b)
+    public void Connect(Neuron a, Neuron b, float weight)
     {
-        Connection c = new Connection(a, b, Random.Range(0.0f,0.5f));
+        Connection c = new Connection(a, b, weight);
         a.AddConnection(c);
+        //Also add the Connection here
+        connections.Add(c);
+
+    }
+
+    //Sending an input to the first Neuron
+    //We should do something better to track multiple inputs
+    public void Feedforward(float input)
+    {
+        Neuron start = neurons[0];
+        start.Feedforward(input);
+    }
+
+    // Update the animation
+
+    public void Update()
+    {
+        foreach (Connection c in connections)
+        {
+            c.Update();
+        }
     }
 
     // We can draw the network
@@ -36,7 +59,10 @@ public class Network
         {
             n.Display();
         }
+        foreach (Connection c in connections)
+        {
+            c.Display();
+        }
         //GL.PopMatrix();
-
     }
 }
