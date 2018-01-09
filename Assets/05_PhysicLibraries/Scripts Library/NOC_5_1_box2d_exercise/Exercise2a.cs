@@ -9,7 +9,6 @@ public class Exercise2a : MonoBehaviour {
     private float _x;
     private float _y;
 
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
