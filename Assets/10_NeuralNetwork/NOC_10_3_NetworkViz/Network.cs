@@ -6,37 +6,63 @@ public class Network
 {
     // The Network has a list of neurons
     public List<Neuron> neurons;
+    public List<Connection> connections;
     public PVector position;
 
     public Network(float x, float y)
     {
         position = new PVector(x, y);
         neurons = new List<Neuron>();
+        connections = new List<Connection>();
     }
 
     // We can add a Neuron
-    public void addNeuron(Neuron n)
+    public void AddNeuron(Neuron n)
     {
         neurons.Add(n);
     }
 
     // We can connection two Neurons
-    public void connect(Neuron a, Neuron b)
+    public void Connect(Neuron a, Neuron b, float weight)
     {
-        Connection c = new Connection(a, b, random(1));
-        a.addConnection(c);
+        Connection c = new Connection(a, b, weight);
+        a.AddConnection(c);
+        //Also add the Connection here
+        connections.Add(c);
+
+    }
+
+    //Sending an input to the first Neuron
+    //We should do something better to track multiple inputs
+    public void Feedforward(float input)
+    {
+        Neuron start = neurons[0];
+        start.Feedforward(input);
+    }
+
+    // Update the animation
+
+    public void Update()
+    {
+        foreach (Connection c in connections)
+        {
+            c.Update();
+        }
     }
 
     // We can draw the network
-    public void display()
+    public void Display()
     {
-        pushMatrix();
-        translate(position.x, position.y);
+        //GL.PushMatrix();
+        //translate(position.x, position.y);
         foreach (Neuron n in neurons)
         {
-            n.display();
+            n.Display();
         }
-        popMatrix();
-
+        foreach (Connection c in connections)
+        {
+            c.Display();
+        }
+        //GL.PopMatrix();
     }
 }

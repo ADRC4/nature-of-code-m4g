@@ -7,9 +7,14 @@ public class Neuron
     // Neuron has a position
     public PVector position;
 
-    // Neuron has a list of connections
-    //ArrayList<Connection> connections;
+    // Neuron has a list of connections    
     public List<Connection> connections;
+
+    //We now track the inputs and sum them
+    float sum = 0;
+
+    //The Neuron's size can be animated
+    float r = 0.1f;
 
     public Neuron(float x, float y)
     {
@@ -18,24 +23,54 @@ public class Neuron
     }
 
     // Add a Connection
-    public void addConnection(Connection c)
+    public void AddConnection(Connection c)
     {
         connections.Add(c);
     }
 
-    // Draw Neuron as a circle
-    public void display()
-    {
-        //stroke(0);
-        //strokeWeight(1);
-        //fill(0);
-        //ellipse(position.x, position.y, 16, 16);
-        Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), .5f);
 
-        // Draw all its connections
+    // Receive an input
+    public void Feedforward(float input)
+    {
+        //Accumulate it
+        sum += input;
+        //Active it?
+        if (sum > 1)
+        {
+            Fire();
+            sum = 0; //Reset the sum to 0 if it fires
+        }
+    }
+
+    //The Neuron Fire
+    public void Fire()
+    {
+        r = 0.2f; //Neuron become bigger
+
+        //We send the output through all connections
         foreach (Connection c in connections)
         {
-            c.display();
+            c.Feedforward(sum);
         }
+
+    }
+
+    // Draw Neuron as a circle
+    public void Display()
+    {
+        //Brightness is mapped to sum
+        float b = 255f;
+        Gizmos.color = Color.HSVToRGB(0,0,b);
+
+        Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), r);
+
+        //// Draw all its connections
+        //foreach (Connection c in connections)
+        //{
+        //    c.Display();
+        //}
+
+        // Size shrinks down back to original dimensions
+        r = Mathf.Lerp(r, 0.1f, 0.1f);
     }
 }
