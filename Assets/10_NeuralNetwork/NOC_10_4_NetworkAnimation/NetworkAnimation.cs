@@ -42,13 +42,16 @@ public class NetworkAnimation : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        while (true)
+        {// Update and display the Network
+            network.Update();
+            network.Display();
+            break;
+        }
 
-        // Draw the Network
-        network.Update();
-        network.Display();
-        //noLoop();
-        
-        network.Feedforward(Random.value);
+        ////Every 100 frame feed an Input
+        if (Time.renderedFrameCount % 100 == 0)
+            network.Feedforward(Random.value);   
     }
 
 }
