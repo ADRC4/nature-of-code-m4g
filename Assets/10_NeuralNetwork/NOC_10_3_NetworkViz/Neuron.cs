@@ -55,6 +55,7 @@ public class Neuron
 
     }
 
+    // Create map function from Proccessing to C#
     public float map (float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
@@ -65,7 +66,6 @@ public class Neuron
     {
         //Brightness is mapped to sum
         float b = map(sum, 0, 1, 1, 0);
-        //float b = 0.5f;
 
         Gizmos.color = Color.HSVToRGB(0,0,b);
         

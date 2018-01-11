@@ -41,15 +41,14 @@ public class Network
     //Sending an input to the first Neuron
     //We should do something better to track multiple inputs
 
-    public void Feedforward(float input)
+    public void Feedforward(float input, int i)
     {
-        for (int i = 0; i < neurons.Count; i++)
-        {
+        //for (i = 0; i < neurons.Count; i++)
+        //{
             Neuron start = neurons[i];
             start.Feedforward(input);            
-        }
+        //}
         
-
     }
 
     // Update the animation

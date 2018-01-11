@@ -39,8 +39,8 @@ public class Connection
         if (sending)
         {
             // Use a simple interpolation
-            sender.x = Mathf.Lerp(sender.x, b.position.x, 0.01f);
-            sender.y = Mathf.Lerp(sender.y, b.position.y, 0.01f);
+            sender.x = Mathf.Lerp(sender.x, b.position.x, 0.015f);
+            sender.y = Mathf.Lerp(sender.y, b.position.y, 0.015f);
         }
 
         float d = Vector2.Distance(new Vector2 (sender.x,sender.y), new Vector2( b.position.x, b.position.y));
