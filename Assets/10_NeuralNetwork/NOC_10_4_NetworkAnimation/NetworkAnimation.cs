@@ -11,6 +11,7 @@ public class NetworkAnimation : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         w = Random.Range(0.0f, 0.5f);
         // Create the Network object
         network = new Network(width / 2, height / 2);
@@ -24,12 +25,12 @@ public class NetworkAnimation : MonoBehaviour
         Neuron f = new Neuron(2.75f, 0);
 
         // Connect them
-        network.Connect(a, b, 0);
-        network.Connect(b, c, w);
-        network.Connect(b, d, w);
-        network.Connect(c, e, w);
-        network.Connect(d, e, w);
-        network.Connect(e, f, 0);
+        network.Connect(a, b, 1);
+        network.Connect(b, c, Random.value);
+        network.Connect(b, d, Random.value);
+        network.Connect(c, e, Random.value);
+        network.Connect(d, e, Random.value);
+        network.Connect(e, f, 1);
 
         // Add them to the Network
         network.AddNeuron(a);
@@ -42,20 +43,14 @@ public class NetworkAnimation : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        while (true)
-        {// Update and display the Network
+        if (network == null) return;        
+        // Update and display the Network
             network.Update();
             network.Display();
-            break;
-        }
 
-        ////Every 100 frame feed an Input
-        int n = network.neurons.Count;
-        for (int i = 0; i < n; i++)
-        {
-            if (Time.renderedFrameCount % (n*10) == (i*10))
-                network.Feedforward(Random.value, i);
-        }
+        ////Every 30 frame feed an Input
+        if (Time.frameCount % 30 == 0)
+            network.Feedforward(Random.value);
 
     }
 

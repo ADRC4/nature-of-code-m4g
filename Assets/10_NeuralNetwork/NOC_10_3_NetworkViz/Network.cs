@@ -41,14 +41,18 @@ public class Network
     //Sending an input to the first Neuron
     //We should do something better to track multiple inputs
 
-    public void Feedforward(float input, int i)
+    public void Feedforward(float input)
+    {        
+            Neuron start = neurons[0];
+            start.Feedforward(input);           
+               
+    }
+
+    public void Feedforward2(float input)
     {
-        //for (i = 0; i < neurons.Count; i++)
-        //{
-            Neuron start = neurons[i];
-            start.Feedforward(input);            
-        //}
-        
+        Neuron start = neurons[1];
+        start.Feedforward(input);
+
     }
 
     // Update the animation
@@ -64,19 +68,21 @@ public class Network
     // We can draw the network
     public void Display()
     {
-        TransformMatrix TM = new TransformMatrix();
-        TM.position = new Vector3(position.x, position.y, 0);
+       // TransformMatrix TM = new TransformMatrix();
+       // TM.position = new Vector3(position.x, position.y, 0);
 
-        TransformStack.Push(TM);
-        TM.position = new Vector3(position.x,position.y,0);        
+       // TransformStack.Push(TM);
+       // TM.position = new Vector3(position.x,position.y,0);        
         foreach (Neuron n in neurons)
         {
             n.Display();
         }
+
         foreach (Connection c in connections)
         {
             c.Display();
         }
-        TransformStack.Pop();    
+
+       // TransformStack.Pop();    
     }
 }

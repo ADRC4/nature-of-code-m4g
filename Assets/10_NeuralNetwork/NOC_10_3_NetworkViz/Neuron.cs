@@ -35,7 +35,7 @@ public class Neuron
         //Accumulate it
         sum += input;
         //Active it?
-        if (sum > 1)
+        if (sum > 1f)
         {
             Fire();
             sum = 0; //Reset the sum to 0 if it fires
@@ -55,8 +55,8 @@ public class Neuron
 
     }
 
-    // Create map function from Proccessing to C#
-    public float map (float s, float a1, float a2, float b1, float b2)
+    //Create map function from Proccessing to C#
+    public float map(float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
@@ -69,10 +69,9 @@ public class Neuron
 
         Gizmos.color = Color.HSVToRGB(0,0,b);
         
-
         Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), r);
 
         // Size shrinks down back to original dimensions
-        r = Mathf.Lerp(r, 0.1f, 0.01f);
+        r = Mathf.Lerp(r, 0.1f, 0.05f);
     }
 }

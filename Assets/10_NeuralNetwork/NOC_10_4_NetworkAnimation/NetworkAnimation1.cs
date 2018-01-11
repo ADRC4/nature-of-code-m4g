@@ -11,6 +11,7 @@ public class NetworkAnimation1 : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         w = Random.Range(0.0f, 0.5f);
         // Create the Network object
         network = new Network(width / 2, height / 2);
@@ -48,19 +49,17 @@ public class NetworkAnimation1 : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        while (true)
-        {// Update and display the Network
+
+        // Update and display the Network
             network.Update();
             network.Display();
-            break;
-        }
 
-        ////Every 100 frame feed an Input
-        int n = network.neurons.Count;
-        for (int i = 0; i < n; i++)
+        ////Every 30 frame feed an Input
+
+        if (Time.frameCount % 30 == 0)
         {
-            if (Time.renderedFrameCount % (n*10) == (i*10))
-                network.Feedforward(Random.value, i);
+            network.Feedforward(Random.value);
+            network.Feedforward2(Random.value);
         }
 
     }
