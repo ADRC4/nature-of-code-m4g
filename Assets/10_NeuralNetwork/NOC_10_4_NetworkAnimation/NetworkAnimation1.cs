@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkAnimation : MonoBehaviour
+public class NetworkAnimation1 : MonoBehaviour
 {
     Network network;
     public float width = 6.4f;
@@ -17,20 +17,25 @@ public class NetworkAnimation : MonoBehaviour
         network = new Network(width / 2, height / 2);
 
         // Create a bunch of Neurons
-        Neuron a = new Neuron(-2.75f, 0);
-        Neuron b = new Neuron(-1.5f, 0);
-        Neuron c = new Neuron(0, 0.75f);
-        Neuron d = new Neuron(0, -0.75f);
-        Neuron e = new Neuron(1.5f, 0);
-        Neuron f = new Neuron(2.75f, 0);
+        Neuron a = new Neuron(-3f, 0.75f);
+        Neuron b = new Neuron(-3f, -0.75f);
+        Neuron c = new Neuron(-1.0f, 0.75f);
+        Neuron d = new Neuron(-1.0f, -0.75f);
+        Neuron e = new Neuron(1.0f, 0.75f);
+        Neuron f = new Neuron(1.0f, -0.75f);
+        Neuron g = new Neuron(3f, 0);
 
         // Connect them
-        network.Connect(a, b, 1);
-        network.Connect(b, c, Random.value);
-        network.Connect(b, d, Random.value);
-        network.Connect(c, e, Random.value);
-        network.Connect(d, e, Random.value);
-        network.Connect(e, f, 1);
+        network.Connect(a, c, w);
+        network.Connect(a, d, w);
+        network.Connect(b, c, w);
+        network.Connect(b, d, w);
+        network.Connect(c, e, w);
+        network.Connect(c, f, w);
+        network.Connect(d, e, w);
+        network.Connect(d, f, w);
+        network.Connect(e, g, w);
+        network.Connect(f, g, w);
 
         // Add them to the Network
         network.AddNeuron(a);
@@ -39,18 +44,23 @@ public class NetworkAnimation : MonoBehaviour
         network.AddNeuron(d);
         network.AddNeuron(e);
         network.AddNeuron(f);
+        network.AddNeuron(g);
     }
 
     void OnDrawGizmos()
     {
-        if (network == null) return;        
+        if (network == null) return;
         // Update and display the Network
-            network.Update();
+        network.Update();
             network.Display();
 
         ////Every 30 frame feed an Input
+
         if (Time.frameCount % 30 == 0)
+        {
             network.Feedforward(Random.value);
+            network.Feedforward2(Random.value);
+        }
 
     }
 

@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exercise2a : MonoBehaviour {
+public class Exercise_5_1 : MonoBehaviour {
 
     public GameObject Box;
     public static List<GameObject> Boxes = new List<GameObject>();
-    private float _x;
-    private float _y;
+    
 
     void Update()
     {
@@ -16,6 +15,7 @@ public class Exercise2a : MonoBehaviour {
             var newBox = Instantiate(Box);
             Boxes.Add(newBox);
         }
+      
     }
 }
 
