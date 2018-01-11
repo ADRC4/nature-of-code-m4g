@@ -49,9 +49,9 @@ public class NetworkAnimation1 : MonoBehaviour
 
     void OnDrawGizmos()
     {
-
+        if (network == null) return;
         // Update and display the Network
-            network.Update();
+        network.Update();
             network.Display();
 
         ////Every 30 frame feed an Input
