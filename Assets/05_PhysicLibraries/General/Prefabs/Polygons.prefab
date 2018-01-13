@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114926880451000936}
   - component: {fileID: 33179461466046976}
   - component: {fileID: 23066625638395954}
+  - component: {fileID: 50612128573763206}
   m_Layer: 0
   m_Name: Polygons
   m_TagString: Untagged
@@ -83,6 +84,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1630257915718014}
   m_Mesh: {fileID: 0}
+--- !u!50 &50612128573763206
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630257915718014}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &114926880451000936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,5 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e98f742ae5e9324f8eab417387cb919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Polygons: {fileID: 0}
+  worldAxisAlignedBoundingBoxLowerBoundDefault: -100
+  worldAxisAlignedBoundingBoxUpperBoundDefault: 100
+  gravity: 9.8
+  velocityIterations: 8
+  positionIteration: 1
+  Polygons: {fileID: 100000, guid: d1a0547fa585142dda1ab5e414eb7cd5, type: 2}
   mat: {fileID: 2100000, guid: 5b58447d29b5ddb458ac420a7731e864, type: 2}
