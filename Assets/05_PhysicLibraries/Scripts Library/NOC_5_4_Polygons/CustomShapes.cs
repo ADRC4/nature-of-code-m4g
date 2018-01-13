@@ -5,6 +5,14 @@ using UnityEngine;
 public class CustomShapes : MonoBehaviour
 {
 
+    public float worldAxisAlignedBoundingBoxLowerBoundDefault = -100f;
+    public float worldAxisAlignedBoundingBoxUpperBoundDefault = 100f;
+
+    public float gravity = 9.8f; // m / s^2
+
+    public int velocityIterations = 8;
+    public int positionIteration = 1;
+
     public GameObject Polygons;
     public static List<GameObject> Polies = new List<GameObject>();
 

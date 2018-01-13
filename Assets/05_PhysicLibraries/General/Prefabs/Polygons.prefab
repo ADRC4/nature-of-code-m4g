@@ -94,5 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e98f742ae5e9324f8eab417387cb919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 0}
   Polygons: {fileID: 0}
+  mat: {fileID: 2100000, guid: 5b58447d29b5ddb458ac420a7731e864, type: 2}
