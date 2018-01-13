@@ -21,6 +21,7 @@ public class Exercise_5_2_Gravity : MonoBehaviour {
             Quaternion rotation = Quaternion.identity;
 
             var newBox = Instantiate(Box, pos, rotation);
+            Rigidbody gameObjectsRigidBody = newBox.AddComponent<Rigidbody>();
             BOXES.Add(newBox);
         }
     }
