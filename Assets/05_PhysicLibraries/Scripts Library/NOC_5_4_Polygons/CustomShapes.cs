@@ -5,6 +5,14 @@ using UnityEngine;
 public class CustomShapes : MonoBehaviour
 {
 
+    public float worldAxisAlignedBoundingBoxLowerBoundDefault = -100f;
+    public float worldAxisAlignedBoundingBoxUpperBoundDefault = 100f;
+
+    public float gravity = 9.8f; // m / s^2
+
+    public int velocityIterations = 8;
+    public int positionIteration = 1;
+
     public GameObject Polygons;
     public static List<GameObject> Polies = new List<GameObject>();
 
@@ -12,6 +20,7 @@ public class CustomShapes : MonoBehaviour
 
     float width = 1;
     float height = 1;
+    Vector3 firstObjPos;
 
     private void Start()
     {
@@ -49,8 +58,14 @@ public class CustomShapes : MonoBehaviour
             
             //Instantiate(Polygons, Random.insideUnitSphere + transform.position, Random.rotation);
             //Instantiate(Polygons, Input.mousePosition, Quaternion.identity);
-            Instantiate(Polygons, transform.position, Random.rotation);
+            //Instantiate(Polygons, transform.position, Random.rotation);
+            //Instantiate(Polygons, new Vector3(0.7f, 3.9f, -4), transform.rotation);
 
+
+            Vector3 position = new Vector3(Random.Range(0.15F, 1.0F), Random.Range(-0.15F, 1.0F), Random.Range(-0.15F, 1.0F));
+
+           
+            Instantiate(Polygons, position + firstObjPos, Quaternion.identity);
         }
 
 
