@@ -7,10 +7,11 @@ public class NetworkViz : MonoBehaviour {
     Network network;
     public float width = 6.4f;
     public float height = 3.6f;
+    float w;
 
     void Start()
     {
-        
+        w = Random.Range(0.0f, 0.5f);
         // Create the Network object
         network = new Network(width / 2, height / 2);
 
@@ -21,10 +22,10 @@ public class NetworkViz : MonoBehaviour {
         Neuron d = new Neuron(2, 0);
 
         // Connect them
-        network.Connect(a, b);
-        network.Connect(a, c);
-        network.Connect(b, d);
-        network.Connect(c, d);
+        network.Connect(a, b, w);
+        network.Connect(a, c, w);
+        network.Connect(b, d, w);
+        network.Connect(c, d, w);
 
         // Add them to the Network
         network.AddNeuron(a);
@@ -35,7 +36,7 @@ public class NetworkViz : MonoBehaviour {
 
     void OnDrawGizmos()
     {
-        //background(255);
+        
         // Draw the Network
         network.Display();
         //noLoop();
