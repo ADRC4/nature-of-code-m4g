@@ -22,7 +22,6 @@ public class Exercise_5_6_DistanceJoint : MonoBehaviour
         rb.AddForce(transform.up * thrust);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
