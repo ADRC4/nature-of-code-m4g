@@ -16,19 +16,22 @@ public class Exercise_5_6_DistanceJoint : MonoBehaviour
 
     void Update()
     {
-        hingeJoints = GetComponents<HingeJoint>(NO1 ,NO2 );
-        foreach (HingeJoint joint in hingeJoints)
+        if (Input.GetMouseButtonDown(0))
         {
-            joint.useSpring = false;
+            hingeJoints = GetComponents<HingeJoint>(NO1, NO2);
+            foreach (HingeJoint joint in hingeJoints)
+            {
+                joint.useSpring = false;
+            }
+
+            var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
+            Quaternion rotation = Quaternion.identity;
+
+            var _NO1 = Instantiate(NO1, pos, rotation);
+            Rigidbody gameObjectsRigidBody = _NO1.AddComponent<Rigidbody>();
+            var _NO2 = Instantiate(NO2, pos, rotation);
+            Rigidbody _gameObjectsRigidBody = _NO2.AddComponent<Rigidbody>();
         }
-
-        var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
-        Quaternion rotation = Quaternion.identity;
-
-        var _NO1 = Instantiate(NO1, pos, rotation);
-        Rigidbody gameObjectsRigidBody = _NO1.AddComponent<Rigidbody>();
-        var _NO2 = Instantiate(NO2, pos, rotation);
-        Rigidbody _gameObjectsRigidBody = _NO2.AddComponent<Rigidbody>();
     }
 
     private T[] GetComponents<T>(GameObject nO1, GameObject nO2)
