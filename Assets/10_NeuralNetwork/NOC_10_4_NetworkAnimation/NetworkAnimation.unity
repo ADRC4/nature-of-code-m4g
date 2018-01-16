@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 799088539}
   - component: {fileID: 799088538}
   - component: {fileID: 799088540}
+  - component: {fileID: 799088541}
   m_Layer: 0
   m_Name: NetworkAnimation
   m_TagString: Untagged
@@ -241,13 +242,32 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 799088537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 707687ae4e4591c4b9978e36982a8010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 6.4
   height: 3.6
+--- !u!114 &799088541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799088537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c9987dbf6d0544fbc34c5ada554a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 6.4
+  height: 3.6
+  inputNeuron: 4
+  firstHidenNeuron: 7
+  secondHidenNeuron: 10
+  outputNeuron: 5
+  gap: 0.65
+  gap1: 0.5
 --- !u!1 &1833907168
 GameObject:
   m_ObjectHideFlags: 0
