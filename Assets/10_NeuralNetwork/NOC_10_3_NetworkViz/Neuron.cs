@@ -14,7 +14,7 @@ public class Neuron
     float sum = 0;
 
     //The Neuron's size can be animated
-    float r = 0.1f;
+    float r = 0.2f;
 
     public Neuron(float x, float y)
     {
@@ -45,7 +45,7 @@ public class Neuron
     //The Neuron Fire
     public void Fire()
     {
-        r = 0.2f; //Neuron suddenly become bigger
+        r = 0.25f; //Neuron suddenly become bigger
 
         //We send the output through all connections
         foreach (Connection c in connections)
@@ -72,6 +72,6 @@ public class Neuron
         Gizmos.DrawSphere(new Vector3(position.x, position.y, 0), r);
 
         // Size shrinks down back to original dimensions
-        r = Mathf.Lerp(r, 0.1f, 0.05f);
+        r = Mathf.Lerp(r, 0.2f, 0.05f);
     }
 }

@@ -58,8 +58,8 @@ public class NetworkAnimation1 : MonoBehaviour
 
         if (Time.frameCount % 30 == 0)
         {
-            network.Feedforward(Random.value);
-            network.Feedforward2(Random.value);
+            network.Feedforward(Random.value, 0);
+            network.Feedforward(Random.value, 1);
         }
 
     }

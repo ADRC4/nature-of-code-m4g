@@ -50,7 +50,7 @@ public class NetworkAnimation : MonoBehaviour
 
         ////Every 30 frame feed an Input
         if (Time.frameCount % 30 == 0)
-            network.Feedforward(Random.value);
+            network.Feedforward(Random.value, 0);
 
     }
 
