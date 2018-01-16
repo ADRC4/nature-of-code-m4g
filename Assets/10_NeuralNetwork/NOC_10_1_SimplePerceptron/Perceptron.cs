@@ -22,27 +22,27 @@ public class Perceptron
     }
 
     //Return an output based on inputs.
-    public int feedforward(float[] inputs)
+    public int Feedforward(float[] inputs)
     {
         float sum = 0;
         for (int i = 0; i < weights.Length; i++)
         {
             sum += inputs[i] * weights[i];
         }
-        return activate(sum);
+        return Activate(sum);
     }
 
     //Output is a +1 or -1.
-    public int activate(float sum)
+    public int Activate(float sum)
     {
         if (sum > 0) return 1;
         else return -1;
     }
 
     //Train the network against known data.
-    public void train(float[] inputs, int desired)
+    public void Train(float[] inputs, int desired)
     {
-        int guess = feedforward(inputs);
+        int guess = Feedforward(inputs);
         float error = desired - guess;
         for (int i = 0; i < weights.Length; i++)
         {
@@ -50,7 +50,7 @@ public class Perceptron
         }
     }
 
-    public float guessY(float x)
+    public float GuessY(float x)
     {
         float w0 = weights[0];
         float w1 = weights[1];
