@@ -17,6 +17,8 @@ public class Vehicle: MonoBehaviour
     float r;
     float maxforce;    // Maximum steering force
     float maxspeed;    // Maximum speed
+    public float width = 6.4f;
+    public float height = 3.6f;
 
     public Vehicle(int n, float x, float y)
     {
@@ -24,7 +26,7 @@ public class Vehicle: MonoBehaviour
         acceleration = new Vector2(0, 0);
         velocity = new Vector2(0, 0);
         position = new Vector2(x, y);
-        r = 3.0f;
+        //r = 3.0f;
         maxspeed = 4;
         maxforce = 0.1f;
     }
@@ -32,21 +34,22 @@ public class Vehicle: MonoBehaviour
     // Method to update position
     public void Update()
     {
-        Vector2 velocity = Vector2.zero;
-        Vector2 acceleration = Vector2.zero;
-        Vector2 position = Vector2.zero;
+        //Vector2 velocity = Vector2.zero;
+        //Vector2 acceleration = Vector2.zero;
+        //Vector2 position = Vector2.zero;
         
         velocity += acceleration;
         // Update velocity
         //velocity.Add(acceleration);
         // Limit speed
 
-        if(velocity.magnitude > maxspeed)
+        if(velocity.magnitude > maxspeed) // limit
         {
             velocity = velocity.normalized * maxspeed;
         }
 
         //velocity.limit(maxspeed);
+
 
         position += velocity;
         //position.add(velocity);
@@ -55,12 +58,12 @@ public class Vehicle: MonoBehaviour
 
         acceleration *= 0;
 
-        if (position.x > 0 && position.x < Screen.width)
+        if (position.x > -width/2 && position.x < width/2)
         {
             this.position.x = position.x;
         }
 
-        if (position.y > 0 && position.y < Screen.width)
+        if (position.y > -height/2 && position.y < height/2)
         {
             this.position.y = position.y;
         }
@@ -81,12 +84,12 @@ public class Vehicle: MonoBehaviour
     {
         
         // Make an array of forces
-        Vector2[] forces = new Vector2[targets.Count]; ///// ----- what is size of arraylist
+        Vector2[] forces = new Vector2[targets.Count]; 
 
         // Steer towards all targets
         for (int i = 0; i < forces.Length; i++)
         {
-            forces[i] = seek(targets[i]); ////-------????
+            forces[i] = seek(targets[i]); 
         }
 
         // That array of forces is the input to the brain
@@ -122,13 +125,13 @@ public class Vehicle: MonoBehaviour
         return steer;
     }
 
-    public void Display() //////------?????
+    public void Display() 
     {
 
         // Draw a triangle rotated in the direction of velocity
         //float theta = velocity.heading2D() + Mathf.PI / 2;
 
-        Color color = Color.green;
+        Color color = Color.black;
 
         Gizmos.DrawSphere(new Vector2(position.x,position.y), 0.1f);
 
