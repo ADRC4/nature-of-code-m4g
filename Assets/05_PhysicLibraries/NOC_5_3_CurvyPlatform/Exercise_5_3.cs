@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exercise_5_2_Gravity : MonoBehaviour {
+public class Exercise_5_3 : MonoBehaviour {
 
     public GameObject Box;
     public GameObject Platform;
