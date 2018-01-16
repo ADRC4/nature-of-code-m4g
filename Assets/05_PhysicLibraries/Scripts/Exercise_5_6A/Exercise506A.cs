@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Exercise506 : MonoBehaviour
+public class Exercise506A : MonoBehaviour
 {
     public GameObject Box;
     public static List<GameObject> Boxes = new List<GameObject>();
