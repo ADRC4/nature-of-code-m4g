@@ -34,7 +34,7 @@ public class Perceptron2
             {
                 this.weights[i] = weights[i];
             }
-            //weights[i] = constrain(weights[i], 0, 1); /////------- WHAT IS CONSTRAIN ????
+            //weights[i] = constrain(weights[i], 0, 1); 
         }
     }
 

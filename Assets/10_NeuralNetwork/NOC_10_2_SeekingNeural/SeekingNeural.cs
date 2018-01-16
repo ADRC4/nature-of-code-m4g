@@ -32,7 +32,7 @@ public class SeekingNeural : MonoBehaviour
         targets = new List<Vector2>();
         for (int i = 0; i < 8; i++)
         {
-            target = new Vector3 (Random.Range(0, width), Random.Range(0, height), 0);
+            target = new Vector3 (Random.Range(-width / 2, width /2), Random.Range(-height/2, height/2), 0);
             targets.Add(target);
         }
     }
@@ -51,7 +51,7 @@ public class SeekingNeural : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(desired.x, desired.y,0), new Vector3(0.6f,0.6f,0.6f));
 
         // Draw the targets
-        foreach (Vector3 t in targets)
+        foreach (Vector3 target in targets)
         {
             //noFill();
             //stroke(0);
@@ -59,9 +59,9 @@ public class SeekingNeural : MonoBehaviour
 
             Gizmos.DrawWireSphere(new Vector3(target.x, target.y, 0), 0.2f);
 
-            var p1 = new Vector3(target.x, target.y - 0.016f, 0);
-            var p2 = new Vector3(target.x - 0.016f, target.y, 0);
-            Gizmos.DrawLine(p1, p2);
+            //var p1 = new Vector3(target.x, target.y - 0.016f, 0);
+            //var p2 = new Vector3(target.x - 0.016f, target.y, 0);
+            //Gizmos.DrawLine(p1, p2);
 
             //ellipse(target.x, target.y, 16, 16);
             //line(target.x, target.y - 16, target.x, target.y + 16);
