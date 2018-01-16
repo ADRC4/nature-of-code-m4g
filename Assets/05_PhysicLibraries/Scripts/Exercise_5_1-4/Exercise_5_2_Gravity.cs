@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Exercise_5_2 : MonoBehaviour
-{
+public class Exercise_5_2_Gravity : MonoBehaviour {
+
     public GameObject Box;
     public GameObject Platform;
-    public static List<GameObject> Boxes = new List<GameObject>();
-    public GravityBox gb;
+    public static List<GameObject> BOXES = new List<GameObject>();
+
+    void Start()
+    {
+        Physics.gravity = new Vector3(0, -1.0F, 0);
+    }
 
     void Update()
     {
@@ -20,8 +21,8 @@ public class Exercise_5_2 : MonoBehaviour
             Quaternion rotation = Quaternion.identity;
 
             var newBox = Instantiate(Box, pos, rotation);
-            Boxes.Add(newBox);
-            gb.Move(Boxes);
+            Rigidbody gameObjectsRigidBody = newBox.AddComponent<Rigidbody>();
+            BOXES.Add(newBox);
         }
     }
 }
