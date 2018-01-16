@@ -68,7 +68,7 @@ public class Vehicle: MonoBehaviour
             this.position.y = position.y;
         }
 
-        //position.x = constrain(position.x, 0, Screen.width);
+        //position.x = constrain(position.x, 0, Screen.width);  ?????
         //position.y = constrain(position.y, 0, Screen.height);
     }
 
@@ -122,6 +122,7 @@ public class Vehicle: MonoBehaviour
         }
         //steer.limit(maxforce);  // Limit to maximum steering force
 
+        ApplyForce(steer);
         return steer;
     }
 
